@@ -32,6 +32,7 @@
     "jquery": true
   },
   "globals": {
-    "ScaleDrone": false
+    "ScaleDrone": false,
+    "sendMessage": false
   }
 }
