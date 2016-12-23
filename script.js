@@ -98,22 +98,32 @@ function updateMembersCountDOM() {
 
 function createMemberElement(member) {
   const { name, color } = member.clientData;
-  return `<div class='member' style='color: ${color}'>${name}</div>`;
+  const el = document.createElement('div');
+  el.appendChild(document.createTextNode(name));
+  el.className = 'member';
+  el.style.color = color;
+  return el;
 }
 
 function updateMembersListDOM() {
-  DOM.membersList.innerHTML = members.map(createMemberElement).join('');
+  DOM.membersList.innerHTML = '';
+  members.forEach(member =>
+    DOM.membersList.appendChild(createMemberElement(member))
+  );
 }
 
 function createMessageElement(text) {
-  return `<div class='message'>${text}</div>`;
+  const el = document.createElement('div');
+  el.appendChild(document.createTextNode(text));
+  el.className = 'message';
+  return el;
 }
 
 function addMessageToListDOM(id, text) {
   const el = DOM.messages;
   const wasTop = el.scrollTop === el.scrollHeight - el.clientHeight;
-  el.innerHTML += createMemberElement(findMember(id));
-  el.innerHTML += createMessageElement(text);
+  el.appendChild(createMemberElement(findMember(id)));
+  el.appendChild(createMessageElement(text));
   if (wasTop) {
     el.scrollTop = el.scrollHeight - el.clientHeight;
   }
