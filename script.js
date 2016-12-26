@@ -32,21 +32,18 @@ drone.on('open', error => {
 
   room.on('members', m => {
     members = m;
-    updateMembersCountDOM();
-    updateMembersListDOM();
+    updateMembersDOM();
   });
 
   room.on('member_join', member => {
     members.push(member);
-    updateMembersCountDOM();
-    updateMembersListDOM();
+    updateMembersDOM();
   });
 
   room.on('member_leave', ({id}) => {
     const index = members.findIndex(member => member.id === id);
     members.splice(index, 1);
-    updateMembersCountDOM();
-    updateMembersListDOM();
+    updateMembersDOM();
   });
 
   room.on('data', (text, member) => {
@@ -96,10 +93,6 @@ function sendMessage() {
 
 //------------- DOM STUFF
 
-function updateMembersCountDOM() {
-  DOM.membersCount.innerText = `${members.length} users in room`;
-}
-
 function createMemberElement(member) {
   const { name, color } = member.clientData;
   const el = document.createElement('div');
@@ -109,7 +102,8 @@ function createMemberElement(member) {
   return el;
 }
 
-function updateMembersListDOM() {
+function updateMembersDOM() {
+  DOM.membersCount.innerText = `${members.length} users in room`;
   DOM.membersList.innerHTML = '';
   members.forEach(member =>
     DOM.membersList.appendChild(createMemberElement(member))
