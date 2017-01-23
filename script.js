@@ -6,14 +6,15 @@ const DOM = {
   form: document.querySelector('.message-form'),
 };
 
-const CLIENT_ID = 'G3TYvCzoXtrIuEtQ';
-//const CLIENT_ID = '2BQI1Uc8yaEAnupY';
+//const CLIENT_ID = 'G3TYvCzoXtrIuEtQ';
+const CLIENT_ID = '2BQI1Uc8yaEAnupY';
 
 const drone = new ScaleDrone(CLIENT_ID, {
   data: { // Will be sent out as clientData via events
     name: getRandomName(),
     color: getRandomColor(),
-  }
+  },
+  url: 'ws://localhost:9000/websocket'
 });
 
 let members = [];
