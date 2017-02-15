@@ -13,15 +13,15 @@
       display: flex;
       flex-direction: column;
       max-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     .members-count,
     .members-list,
     .messages {
       border: 1px solid #e4e4e4;
-      padding: 15px;
-      margin-bottom: 15px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
     }
 
     .messages {
@@ -30,15 +30,22 @@
     }
 
     .message {
-      padding: 5px 0;
-    }
-    .message .member {
-      display: inline-block;
+      border-bottom: 1px solid #e4e4e4;
     }
 
     .member {
-      padding-right: 10px;
+      padding-left: 13px;
       position: relative;
+    }
+    .member:before {
+      content: ' ';
+      height: 8px;
+      width: 8px;
+      left: 0px;
+      top: 5px;
+      background: #5ff442;
+      position: absolute;
+      border-radius: 50%;
     }
 
     .message-form {
@@ -47,12 +54,6 @@
     }
     .message-form__input {
       flex-grow: 1;
-      border: 1px solid #dfdfdf;
-      padding: 10px 15px;
-      font-size: 16px;
-    }
-    .message-form__button {
-      margin: 10px;
     }
   </style>
 </head>
@@ -62,7 +63,7 @@
   <div class="messages"></div>
   <form class="message-form" onsubmit="return false;">
     <input class="message-form__input" placeholder="Type a message.." type="text"/>
-    <input class="message-form__button" value="Send" type="submit"/>
+    <input value="Send" type="submit"/>
   </form>
   <script src="./script.js"></script>
 </body>
