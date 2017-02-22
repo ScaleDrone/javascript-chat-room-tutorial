@@ -1,11 +1,3 @@
-const DOM = {
-  membersCount: document.querySelector('.members-count'),
-  membersList: document.querySelector('.members-list'),
-  messages: document.querySelector('.messages'),
-  input: document.querySelector('.message-form__input'),
-  form: document.querySelector('.message-form'),
-};
-
 const CLIENT_ID = 'G3TYvCzoXtrIuEtQ';
 //const CLIENT_ID = '2BQI1Uc8yaEAnupY';
 
@@ -93,6 +85,14 @@ function sendMessage() {
 }
 
 //------------- DOM STUFF
+
+const DOM = {
+  membersCount: document.querySelector('.members-count'),
+  membersList: document.querySelector('.members-list'),
+  messages: document.querySelector('.messages'),
+  input: document.querySelector('.message-form__input'),
+  form: document.querySelector('.message-form'),
+};
 
 function createMemberElement(member) {
   const { name, color } = member.clientData;

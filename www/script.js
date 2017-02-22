@@ -6,15 +6,15 @@ const DOM = {
   form: document.querySelector('.message-form'),
 };
 
-//const CLIENT_ID = 'G3TYvCzoXtrIuEtQ';
-const CLIENT_ID = '2BQI1Uc8yaEAnupY';
+const CLIENT_ID = 'G3TYvCzoXtrIuEtQ';
+//const CLIENT_ID = '2BQI1Uc8yaEAnupY';
 
 const drone = new ScaleDrone(CLIENT_ID, {
   data: { // Will be sent out as clientData via events
     name: getRandomName(),
     color: getRandomColor(),
   },
-  url: 'ws://localhost:9000/websocket'
+  //url: 'ws://localhost:9000/websocket'
 });
 
 let members = [];
@@ -104,15 +104,16 @@ function createMemberElement(member) {
 }
 
 function updateMembersDOM() {
-  DOM.membersCount.innerText = `${members.length} users in room`;
+  DOM.membersCount.innerText = `${members.length} users in room:`;
   DOM.membersList.innerHTML = '';
   members.forEach(member =>
     DOM.membersList.appendChild(createMemberElement(member))
   );
 }
 
-function createMessageElement(text) {
+function createMessageElement(text, member) {
   const el = document.createElement('div');
+  el.appendChild(createMemberElement(member));
   el.appendChild(document.createTextNode(text));
   el.className = 'message';
   return el;
@@ -121,8 +122,7 @@ function createMessageElement(text) {
 function addMessageToListDOM(text, member) {
   const el = DOM.messages;
   const wasTop = el.scrollTop === el.scrollHeight - el.clientHeight;
-  el.appendChild(createMemberElement(member));
-  el.appendChild(createMessageElement(text));
+  el.appendChild(createMessageElement(text, member));
   if (wasTop) {
     el.scrollTop = el.scrollHeight - el.clientHeight;
   }
