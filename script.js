@@ -1,4 +1,4 @@
-const CLIENT_ID = 'G3TYvCzoXtrIuEtQ';
+const CLIENT_ID = '4cNswoNqM2wVFHPg';
 //const CLIENT_ID = '2BQI1Uc8yaEAnupY';
 
 const drone = new ScaleDrone(CLIENT_ID, {
@@ -15,12 +15,14 @@ drone.on('open', error => {
   if (error) {
     return console.error(error);
   }
+  console.log('Successfully connected to Scaledrone');
 
   const room = drone.subscribe('observable-room');
   room.on('open', error => {
     if (error) {
       return console.error(error);
     }
+    console.log('Successfully joined room');
   });
 
   room.on('members', m => {
@@ -70,6 +72,16 @@ function getRandomColor() {
   return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
 
+//------------- DOM STUFF
+
+const DOM = {
+  membersCount: document.querySelector('.members-count'),
+  membersList: document.querySelector('.members-list'),
+  messages: document.querySelector('.messages'),
+  input: document.querySelector('.message-form__input'),
+  form: document.querySelector('.message-form'),
+};
+
 DOM.form.addEventListener('submit', sendMessage);
 
 function sendMessage() {
@@ -83,16 +95,6 @@ function sendMessage() {
     message: value,
   });
 }
-
-//------------- DOM STUFF
-
-const DOM = {
-  membersCount: document.querySelector('.members-count'),
-  membersList: document.querySelector('.members-list'),
-  messages: document.querySelector('.messages'),
-  input: document.querySelector('.message-form__input'),
-  form: document.querySelector('.message-form'),
-};
 
 function createMemberElement(member) {
   const { name, color } = member.clientData;
